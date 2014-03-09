@@ -17,5 +17,15 @@ class FeatureFactory
     door
   end
 
+  def desk(x, y)
+    desk = Entity.new
+    pos = PositionComponent.new(desk)
+    pos.set x, y
+    desk.add pos
+    desk.add SymbolComponent.new(desk, '=')
+    desk.add WalkableComponent.new(desk, false)
+    desk
+  end
+
 end
 

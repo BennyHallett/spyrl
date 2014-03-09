@@ -7,10 +7,19 @@ class World
     @entities = Array.new
     @width = generator.width
     @height = generator.height
+
+    total_desks = 25
+
     generator.generate do |x, y, height|
       @world[key_for(x.floor, y.floor)] = tile_for_height(height)
 
       add_entity(feature_factory.door(x.floor, y.floor)) if height.floor == 2
+
+      add_desk = total_desks > 0 && height.floor == 0 && rand > 0.99
+      if add_desk
+        add_entity(feature_factory.desk(x.floor, y.floor))
+        total_desks -= 1
+      end
     end
   end
 
