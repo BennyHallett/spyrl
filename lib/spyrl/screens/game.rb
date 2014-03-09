@@ -33,19 +33,34 @@ class GameScreen
   end
 
   def update(input)
-    input = input.wait_for_input
+    char = input.wait_for_input
     move = @player.get(:movement)
 
-    move.north if input == 'k'
-    move.south if input == 'j'
-    move.east if input == 'l'
-    move.west if input == 'h'
-    move.north_east if input == 'u'
-    move.north_west if input == 'y'
-    move.south_east if input == 'n'
-    move.south_west if input == 'b'
+    move.north if char == 'k'
+    move.south if char == 'j'
+    move.east if char == 'l'
+    move.west if char == 'h'
+    move.north_east if char == 'u'
+    move.north_west if char == 'y'
+    move.south_east if char == 'n'
+    move.south_west if char == 'b'
 
-    input == 'x'
+    if char == 'o'
+      #puts 'Which direction?'
+      open_dir = input.wait_for_input
+      open = @player.get(:open)
+
+      open.north if open_dir == 'k'
+      open.south if open_dir == 'j'
+      open.east if open_dir == 'l'
+      open.west if open_dir == 'h'
+      open.north_east if open_dir == 'u'
+      open.north_west if open_dir == 'y'
+      open.south_east if open_dir == 'n'
+      open.south_west if open_dir == 'b'
+    end
+
+    char == 'x'
   end
 
 end

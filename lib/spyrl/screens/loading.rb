@@ -3,6 +3,7 @@ require 'delve/generator/rogue'
 
 require 'spyrl/world'
 require 'spyrl/factory/player'
+require 'spyrl/factory/feature'
 require 'spyrl/screens/game'
 
 class LoadingScreen
@@ -24,7 +25,7 @@ class LoadingScreen
   end
 
   def update(input)
-    @world = World.new(RogueGenerator.new(128, 64))
+    @world = World.new(RogueGenerator.new(128, 64), FeatureFactory.new)
     @player = @player_factory.create @world
     randomize_player_location
     @manager.push_screen GameScreen.new(@world, @player, @manager)

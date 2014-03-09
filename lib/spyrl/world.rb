@@ -1,6 +1,6 @@
 class World
 
-  def initialize(generator)
+  def initialize(generator, feature_factory)
     raise 'Cannot create world when generator is nil' unless generator
 
     @world = Hash.new
@@ -9,6 +9,8 @@ class World
     @height = generator.height
     generator.generate do |x, y, height|
       @world[key_for(x.floor, y.floor)] = tile_for_height(height)
+
+      add_entity(feature_factory.door(x.floor, y.floor)) if height.floor == 2
     end
   end
 
@@ -17,8 +19,8 @@ class World
     # This is super inefficient
     found = @entities.select { |e| e.get(:position).x == x and e.get(:position).y == y }
     entity = found.first
-    if entity and entity.has?(:symbol)
-      return entity.get(:symbol).symbol
+    if entity
+      return entity
     else
       return @world[key_for(x, y)]
     end
@@ -42,7 +44,12 @@ class World
   end
 
   def free(x, y)
-    at(x, y)[:walkable]
+    tile = at(x, y)
+    if tile.respond_to?(:has?)
+      return(tile.has?(:walkable) and tile.get(:walkable).walkable)
+    else
+      return tile[:walkable]
+    end
   end
 
   private
@@ -54,7 +61,6 @@ class World
     v = (height).floor
     t = '.'
     t = '#' if v == 1
-    t = '+' if v == 2
 
     c = :white
 
