@@ -14,7 +14,7 @@ class PlayerFactory
     player.add PositionComponent.new(player)
     player.add CollisionComponent.new(player, world)
     player.add MovementComponent.new(player, :eightway)
-    player.add SymbolComponent.new(player, '@')
+    player.add SymbolComponent.new(player, '@', :yellow)
     player.add WalkableComponent.new(player, false)
     player.add OpenComponent.new(player, world)
     player.add CloseComponent.new(player, world)
