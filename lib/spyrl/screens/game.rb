@@ -60,6 +60,21 @@ class GameScreen
       open.south_west if open_dir == 'b'
     end
 
+    if char == 'c'
+      #puts 'Which direction?'
+      close_dir = input.wait_for_input
+      close = @player.get(:close)
+
+      close.north if close_dir == 'k'
+      close.south if close_dir == 'j'
+      close.east if close_dir == 'l'
+      close.west if close_dir == 'h'
+      close.north_east if close_dir == 'u'
+      close.north_west if close_dir == 'y'
+      close.south_east if close_dir == 'n'
+      close.south_west if close_dir == 'b'
+    end
+
     char == 'x'
   end
 

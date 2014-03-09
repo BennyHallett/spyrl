@@ -5,6 +5,7 @@ require 'delve/component/symbol'
 require 'delve/component/collision'
 require 'spyrl/component/walkable'
 require 'spyrl/component/open'
+require 'spyrl/component/close'
 
 class PlayerFactory
 
@@ -16,6 +17,7 @@ class PlayerFactory
     player.add SymbolComponent.new(player, '@')
     player.add WalkableComponent.new(player, false)
     player.add OpenComponent.new(player, world)
+    player.add CloseComponent.new(player, world)
     player
   end
 
