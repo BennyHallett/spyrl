@@ -1,15 +1,26 @@
 require 'delve/widgets/menu'
-require 'delve/widgets/text'
+require 'delve/widgets/multi_line'
 
 require 'spyrl/screens/loading'
+require 'spyrl/screens/help'
 
 class TitleScreen
 
   def initialize(screen_manager)
-    @title = TextWidget.new :center, 1, 'spyrl - the roguelike'
+    @title = MultiLineWidget.new :center, 1, [
+' _____            ______ _     ',
+'/  ___|           | ___ \ |    ',
+'\ `--. _ __  _   _| |_/ / |    ',
+' `--. \ `_ \| | | |    /| |    ',
+'/\__/ / |_) | |_| | |\ \| |____',
+'\____/| .__/ \__, \_| \_\_____/',
+'      | |     __/ |            ',
+'      |_|    |___/             '
+]
     
     @menu = MenuWidget.new 1, 15, {
       'n' => 'New game',
+      'h' => 'Help',
       'x' => 'Exit'
     }
     @manager = screen_manager
@@ -34,6 +45,10 @@ class TitleScreen
 
     if @menu.selected_item == 'New game'
       @manager.push_screen LoadingScreen.new(@manager)
+    end
+
+    if @menu.selected_item == 'Help'
+      @manager.push_screen HelpScreen.new(@manager)
     end
 
     @menu.selected_item == 'Exit'
