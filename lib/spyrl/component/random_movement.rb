@@ -1,6 +1,6 @@
 class RandomMovementComponent
   def initialize(parent)
-    raise 'Cannot create walkable component when parent is nil' unless parent
+    raise 'Cannot create random movement component when parent is nil' unless parent
 
     @parent = parent
   end
