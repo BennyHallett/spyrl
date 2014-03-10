@@ -8,18 +8,17 @@ class World
     @width = generator.width
     @height = generator.height
 
-    total_desks = 25
+    total_desks = 10
 
     generator.generate do |x, y, height|
       @world[key_for(x.floor, y.floor)] = tile_for_height(height)
 
       add_entity(feature_factory.door(x.floor, y.floor)) if height.floor == 2
+    end
 
-      add_desk = total_desks > 0 && height.floor == 0 && rand > 0.99
-      if add_desk
-        add_entity(feature_factory.desk(x.floor, y.floor))
-        total_desks -= 1
-      end
+    (0..total_desks - 1).each do |i|
+      loc = random_free_location
+      add_entity(feature_factory.desk(loc[:x], loc[:y]))
     end
   end
 
@@ -75,5 +74,18 @@ class World
 
     { char: t, color: c, walkable: (t == '.') }
   end
+
+  def random_free_location
+    rx = (rand * @width).floor
+    ry = (rand * @height).floor
+
+    while !free(rx, ry)
+      rx = (rand * @width).floor
+      ry = (rand * @height).floor
+    end
+
+    { x: rx, y: ry }
+  end
+
 
 end
