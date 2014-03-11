@@ -13,28 +13,27 @@ class PlayerFactory
 
   def create(world, engine, input)
     player = Entity.new
-    player.add PositionComponent.new(player)
-    player.add CollisionComponent.new(player, world)
-    player.add MovementComponent.new(player, :eightway)
-    player.add SymbolComponent.new(player, '@', :white)
-    player.add WalkableComponent.new(player, false)
-    player.add OpenComponent.new(player, world)
-    player.add CloseComponent.new(player, world)
+    add_basic_components player, world, :white
     player.add PlayerMovementComponent.new(player, engine, input)
     player
   end
 
   def enemy(world, color)
     enemy = Entity.new
-    enemy.add PositionComponent.new(enemy)
-    enemy.add CollisionComponent.new(enemy, world)
-    enemy.add MovementComponent.new(enemy, :eightway)
-    enemy.add SymbolComponent.new(enemy, '@', color)
-    enemy.add WalkableComponent.new(enemy, false)
-    enemy.add OpenComponent.new(enemy, world)
-    enemy.add CloseComponent.new(enemy, world)
+    add_basic_components enemy, world, color
     enemy.add RandomMovementComponent.new(enemy)
     enemy
+  end
+
+  private
+  def add_basic_components(player, world, color)
+    player.add PositionComponent.new(player)
+    player.add CollisionComponent.new(player, world)
+    player.add MovementComponent.new(player, :eightway)
+    player.add SymbolComponent.new(player, '@', color)
+    player.add WalkableComponent.new(player, false)
+    player.add OpenComponent.new(player, world)
+    player.add CloseComponent.new(player, world)
   end
 
 end
