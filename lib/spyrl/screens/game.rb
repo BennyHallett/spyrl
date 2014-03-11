@@ -11,8 +11,6 @@ class GameScreen
     @boundary = nil
     @game_border = nil
     @viewport = nil
-
-    @world.add_entity @player, true
   end
 
   def render(display)

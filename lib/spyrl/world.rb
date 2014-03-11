@@ -62,6 +62,18 @@ class World
     end
   end
 
+  def random_free_location
+    rx = (rand * @width).floor
+    ry = (rand * @height).floor
+
+    while !free(rx, ry)
+      rx = (rand * @width).floor
+      ry = (rand * @height).floor
+    end
+
+    { x: rx, y: ry }
+  end
+
   private
   def key_for(x, y)
     "#{x},#{y}"
@@ -76,18 +88,5 @@ class World
 
     { char: t, color: c, walkable: (t == '.') }
   end
-
-  def random_free_location
-    rx = (rand * @width).floor
-    ry = (rand * @height).floor
-
-    while !free(rx, ry)
-      rx = (rand * @width).floor
-      ry = (rand * @height).floor
-    end
-
-    { x: rx, y: ry }
-  end
-
 
 end

@@ -32,22 +32,29 @@ class LoadingScreen
     engine = Engine.new scheduler
     @world = World.new(RogueGenerator.new(128, 64), FeatureFactory.new, scheduler)
     @player = @player_factory.create @world, engine, input
-    randomize_player_location
+    randomize_location @player
+    @world.add_entity @player, true
+
+    create_enemy :red
+    create_enemy :blue
+    create_enemy :green
+    create_enemy :yellow
+    create_enemy :cyan
+
     @manager.push_screen GameScreen.new(@world, @player, @manager, engine)
     false
   end
 
   private
-  def randomize_player_location
-    rx = (rand * @world.width).floor
-    ry = (rand * @world.height).floor
+  def create_enemy(color)
+    enemy = @player_factory.enemy @world, color
+    randomize_location enemy
+    @world.add_entity enemy, true
+  end
 
-    while !@world.free(rx, ry)
-      rx = (rand * @world.width).floor
-      ry = (rand * @world.height).floor
-    end
-
-    @player.get(:position).set(rx, ry)
+  def randomize_location(thing)
+    pos = @world.random_free_location
+    thing.get(:position).set(pos[:x], pos[:y])
   end
 
 end

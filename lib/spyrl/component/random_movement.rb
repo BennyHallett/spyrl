@@ -10,7 +10,7 @@ class RandomMovementComponent
   end
 
   def act
-    if @parent.has? :movemment
+    if @parent.has? :movement
       dir = (rand * 4).floor
       move = @parent.get :movement
 
