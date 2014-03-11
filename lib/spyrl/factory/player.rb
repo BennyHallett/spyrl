@@ -9,6 +9,7 @@ require 'spyrl/component/close'
 require 'spyrl/component/player_movement'
 require 'spyrl/component/random_movement'
 require 'spyrl/component/name'
+require 'spyrl/component/health'
 
 class PlayerFactory
 
@@ -36,6 +37,7 @@ class PlayerFactory
     player.add OpenComponent.new(player, world)
     player.add CloseComponent.new(player, world)
     player.add NameComponent.new(player, "The #{color.to_s.capitalize} spy")
+    player.add HealthComponent.new(player, 10)
   end
 
 end
