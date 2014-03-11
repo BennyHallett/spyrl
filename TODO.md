@@ -1,4 +1,5 @@
 * Melee combat
+* Enemy spies should (initially) attack you if you walk past them
 * Search drawers
 * Find each item
 * Carry items one at a time
