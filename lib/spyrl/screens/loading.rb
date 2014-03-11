@@ -8,13 +8,17 @@ require 'spyrl/world'
 require 'spyrl/factory/player'
 require 'spyrl/factory/feature'
 require 'spyrl/screens/game'
+require 'spyrl/message_buffer'
 
 class LoadingScreen
 
   def initialize(screen_manager)
     @manager = screen_manager
     @text = TextWidget.new :center, :center, 'Creating world (this may take a while)'
-    @player_factory = PlayerFactory.new
+    @messages = MessageBuffer.new
+    @messages.write 'Welcome to SpyRL', :green
+    @messages.write 'Collect the 6 artifacts and escape before the other spies do', :green
+    @player_factory = PlayerFactory.new @messages
     @player = nil
     @world = nil
   end
@@ -41,7 +45,7 @@ class LoadingScreen
     create_enemy :yellow
     create_enemy :cyan
 
-    @manager.push_screen GameScreen.new(@world, @player, @manager, engine)
+    @manager.push_screen GameScreen.new(@world, @player, @manager, engine, @messages)
     false
   end
 

@@ -13,6 +13,10 @@ require 'spyrl/component/health'
 
 class PlayerFactory
 
+  def initialize(messages)
+    @messages = messages
+  end
+
   def create(world, engine, input)
     player = Entity.new
     add_basic_components player, world, :white
