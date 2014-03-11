@@ -24,4 +24,8 @@ class HealthComponent
     @max
   end
 
+  def reduce(amount)
+    @current -= amount
+  end
+
 end
