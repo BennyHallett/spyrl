@@ -6,10 +6,11 @@ require 'delve/component/collision'
 require 'spyrl/component/walkable'
 require 'spyrl/component/open'
 require 'spyrl/component/close'
+require 'spyrl/component/player_movement'
 
 class PlayerFactory
 
-  def create(world)
+  def create(world, engine, input)
     player = Entity.new
     player.add PositionComponent.new(player)
     player.add CollisionComponent.new(player, world)
@@ -18,6 +19,7 @@ class PlayerFactory
     player.add WalkableComponent.new(player, false)
     player.add OpenComponent.new(player, world)
     player.add CloseComponent.new(player, world)
+    player.add PlayerMovementComponent.new(player, engine, input)
     player
   end
 

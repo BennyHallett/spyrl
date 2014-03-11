@@ -4,3 +4,4 @@
 * Find each item
 * Carry items one at a time
 * Carry many items if you have a bag
+* be able to exit properly

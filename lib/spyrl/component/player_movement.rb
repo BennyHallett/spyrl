@@ -1,8 +1,11 @@
 class PlayerMovementComponent
-  def initialize(parent)
+  def initialize(parent, engine, input)
     raise 'Cannot create player movement component when parent is nil' unless parent
+    raise 'Cannot create player movement component when engine is nil' unless engine
 
     @parent = parent
+    @engine = engine
+    @input = input
   end
 
   def id
@@ -10,8 +13,8 @@ class PlayerMovementComponent
   end
 
   def act
-    char = input.wait_for_input
-    move = @player.get(:movement)
+    char = @input.wait_for_input
+    move = @parent.get(:movement)
 
     move.north if char == 'k'
     move.south if char == 'j'
@@ -23,8 +26,8 @@ class PlayerMovementComponent
     move.south_west if char == 'b'
 
     if char == 'o'
-      open_dir = input.wait_for_input
-      open = @player.get(:open)
+      open_dir = @input.wait_for_input
+      open = @parent.get(:open)
 
       open.north if open_dir == 'k'
       open.south if open_dir == 'j'
@@ -37,8 +40,8 @@ class PlayerMovementComponent
     end
 
    if char == 'c'
-      close_dir = input.wait_for_input
-      close = @player.get(:close)
+      close_dir = @input.wait_for_input
+      close = @parent.get(:close)
 
       close.north if close_dir == 'k'
       close.south if close_dir == 'j'
@@ -50,6 +53,7 @@ class PlayerMovementComponent
       close.south_west if close_dir == 'b'
     end
 
+    @engine.lock
     char == 'x'
   end
 

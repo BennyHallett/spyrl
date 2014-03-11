@@ -1,10 +1,11 @@
 class World
 
-  def initialize(generator, feature_factory)
+  def initialize(generator, feature_factory, scheduler)
     raise 'Cannot create world when generator is nil' unless generator
 
     @world = Hash.new
     @entities = Array.new
+    @scheduler = scheduler
     @width = generator.width
     @height = generator.height
 
@@ -38,9 +39,10 @@ class World
     @entities
   end
 
-  def add_entity(entity)
+  def add_entity(entity, repeat=false)
     raise 'Cannot add entity that doesnt have a position' unless entity.has? :position
     @entities << entity
+    @scheduler.add entity, repeat
   end
 
   def width
