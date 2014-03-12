@@ -8,3 +8,8 @@
 * Hide item
 * be able to exit properly
 * Enemy AI
+
+
+** Delve **
+
+* Collision should return what you're colliding with

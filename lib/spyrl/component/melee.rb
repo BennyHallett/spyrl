@@ -13,7 +13,7 @@ class MeleeComponent
 
   def attack(target)
     if target.has? :attackable
-      target.attacked(@damage)
+      target.get(:attackable).attacked(@damage)
     end
   end
 

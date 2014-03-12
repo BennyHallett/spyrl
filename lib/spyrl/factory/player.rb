@@ -22,7 +22,7 @@ class PlayerFactory
   def create(world, engine, input)
     player = Entity.new
     add_basic_components player, world, :white
-    player.add PlayerMovementComponent.new(player, engine, input)
+    player.add PlayerMovementComponent.new(player, engine, input, world)
     player
   end
 
@@ -37,7 +37,7 @@ class PlayerFactory
   def add_basic_components(player, world, color)
     player.add PositionComponent.new(player)
     player.add CollisionComponent.new(player, world)
-    player.add MovementComponent.new(player, :eightway)
+    player.add MovementComponent.new(player, :fourway)
     player.add SymbolComponent.new(player, '@', color)
     player.add WalkableComponent.new(player, false)
     player.add OpenComponent.new(player, world)

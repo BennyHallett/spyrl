@@ -1,11 +1,12 @@
 class PlayerMovementComponent
-  def initialize(parent, engine, input)
+  def initialize(parent, engine, input, world)
     raise 'Cannot create player movement component when parent is nil' unless parent
     raise 'Cannot create player movement component when engine is nil' unless engine
 
     @parent = parent
     @engine = engine
     @input = input
+    @world = world
   end
 
   def id
@@ -15,15 +16,44 @@ class PlayerMovementComponent
   def act
     char = @input.wait_for_input
     move = @parent.get(:movement)
+    pos = @parent.get(:position)
+    melee = @parent.get(:melee)
 
-    move.north if char == 'k'
-    move.south if char == 'j'
-    move.east if char == 'l'
-    move.west if char == 'h'
-    move.north_east if char == 'u'
-    move.north_west if char == 'y'
-    move.south_east if char == 'n'
-    move.south_west if char == 'b'
+    if char == 'k'
+      thing = @world.at(pos.x, pos.y - 1)
+      if thing.respond_to? :has? and thing.has?(:attackable)
+        melee.attack(thing)
+      else
+        move.north
+      end
+    end
+
+    if char == 'j'
+      thing = @world.at(pos.x, pos.y + 1)
+      if thing.respond_to? :has? and thing.has?(:attackable)
+        melee.attack(thing)
+      else
+        move.south
+      end
+    end
+
+    if char == 'l'
+      thing = @world.at(pos.x + 1, pos.y)
+      if thing.respond_to? :has? and thing.has?(:attackable)
+        melee.attack(thing)
+      else
+        move.east
+      end
+    end
+
+    if char == 'h'
+      thing = @world.at(pos.x - 1, pos.y)
+      if thing.respond_to? :has? and thing.has?(:attackable)
+        melee.attack(thing)
+      else
+        move.west
+      end
+    end
 
     if char == 'o'
       open_dir = @input.wait_for_input
@@ -33,10 +63,6 @@ class PlayerMovementComponent
       open.south if open_dir == 'j'
       open.east if open_dir == 'l'
       open.west if open_dir == 'h'
-      open.north_east if open_dir == 'u'
-      open.north_west if open_dir == 'y'
-      open.south_east if open_dir == 'n'
-      open.south_west if open_dir == 'b'
     end
 
    if char == 'c'
@@ -47,10 +73,6 @@ class PlayerMovementComponent
       close.south if close_dir == 'j'
       close.east if close_dir == 'l'
       close.west if close_dir == 'h'
-      close.north_east if close_dir == 'u'
-      close.north_west if close_dir == 'y'
-      close.south_east if close_dir == 'n'
-      close.south_west if close_dir == 'b'
     end
 
     @engine.lock
