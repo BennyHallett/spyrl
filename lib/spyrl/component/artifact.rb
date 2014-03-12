@@ -10,6 +10,4 @@ class ArtifactComponent
     :artifact
   end
 
-  end
-
 end

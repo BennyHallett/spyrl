@@ -19,7 +19,9 @@ class World
 
     (0..total_desks - 1).each do |i|
       loc = random_free_location
-      add_entity(feature_factory.desk(loc[:x], loc[:y]))
+      desk = feature_factory.desk(loc[:x], loc[:y])
+      desk.get(:container).put(feature_factory.ruby) if i == 0
+      add_entity(desk)
     end
   end
 
