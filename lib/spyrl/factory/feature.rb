@@ -4,6 +4,8 @@ require 'delve/component/symbol'
 require 'spyrl/component/door'
 require 'spyrl/component/walkable'
 require 'spyrl/component/container'
+require 'spyrl/component/name'
+require 'spyrl/component/artifact'
 
 class FeatureFactory
 
@@ -31,6 +33,14 @@ class FeatureFactory
     desk.add WalkableComponent.new(desk, false)
     desk.add ContainerComponent.new(desk, @messages)
     desk
+  end
+
+  def ruby
+    ruby = Entity.new
+    ruby.add NameComponent.new(ruby, 'Ruby')
+    ruby.add SymbolComponent.new(ruby, 'v', :red)
+    ruby.add WalkableComponent.new(ruby, true)
+    ruby.add ArtifactComponent.new(ruby)
   end
 
 end
