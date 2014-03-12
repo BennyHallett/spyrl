@@ -29,7 +29,7 @@ class PlayerFactory
   def enemy(world, color)
     enemy = Entity.new
     add_basic_components enemy, world, color
-    enemy.add RandomMovementComponent.new(enemy)
+    enemy.add RandomMovementComponent.new(enemy, world)
     enemy
   end
 

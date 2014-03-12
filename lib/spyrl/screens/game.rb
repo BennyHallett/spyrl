@@ -24,6 +24,7 @@ class GameScreen
     @viewport ||= ViewportWidget.new 2, 1, display.width - 28, display.height - 7, @world
     @name ||= TextWidget.new display.width - 24, 1, @player.get(:name).name
     @health ||= ProgressWidget.new display.width - 24, 2, 22, @player.get(:health).current, @player.get(:health).max, :green, :white
+    @health.current = @player.get(:health).current
     @message_box ||= MessagesWidget.new 2, display.height - 5, display.width - 6, 4, @messages
 
     @boundary.draw display
