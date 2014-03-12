@@ -3,8 +3,13 @@ require 'delve/component/position'
 require 'delve/component/symbol'
 require 'spyrl/component/door'
 require 'spyrl/component/walkable'
+require 'spyrl/component/container'
 
 class FeatureFactory
+
+  def initialize(messages)
+    @messages = messages
+  end
 
   def door(x, y)
     door = Entity.new
@@ -24,6 +29,7 @@ class FeatureFactory
     desk.add pos
     desk.add SymbolComponent.new(desk, '=')
     desk.add WalkableComponent.new(desk, false)
+    desk.add ContainerComponent.new(desk, @messages)
     desk
   end
 

@@ -34,7 +34,7 @@ class LoadingScreen
   def update(input)
     scheduler = SimpleScheduler.new EventQueue.new
     engine = Engine.new scheduler
-    @world = World.new(RogueGenerator.new(128, 64), FeatureFactory.new, scheduler)
+    @world = World.new(RogueGenerator.new(128, 64), FeatureFactory.new(@messages), scheduler)
     @player = @player_factory.create @world, engine, input
     randomize_location @player
     @world.add_entity @player, true
