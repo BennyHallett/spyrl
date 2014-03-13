@@ -1,8 +1,10 @@
-* Search drawers
 * Find each item
+* Take from drawer
 * Carry items one at a time
 * Carry many items if you have a bag
 * Drop item
+* Trap doors and desks
+* Be able to heal yourself
 * Hide item
 * be able to exit properly
 * Enemy AI
