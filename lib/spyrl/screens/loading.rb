@@ -15,7 +15,7 @@ class LoadingScreen
   def initialize(screen_manager)
     @manager = screen_manager
     @text = TextWidget.new :center, :center, 'Creating world (this may take a while)'
-    @messages = MessageBuffer.new
+    @messages = MessageBuffer.new 4
     @messages.write 'Welcome to SpyRL', :green
     @messages.write 'Collect the 6 artifacts and escape before the other spies do', :green
     @player_factory = PlayerFactory.new @messages

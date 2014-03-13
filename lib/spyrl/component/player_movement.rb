@@ -1,5 +1,5 @@
 class PlayerMovementComponent
-  def initialize(parent, engine, input, world)
+  def initialize(parent, engine, input, world, messages)
     raise 'Cannot create player movement component when parent is nil' unless parent
     raise 'Cannot create player movement component when engine is nil' unless engine
 
@@ -7,6 +7,7 @@ class PlayerMovementComponent
     @engine = engine
     @input = input
     @world = world
+    @messages = messages
   end
 
   def id
@@ -14,6 +15,8 @@ class PlayerMovementComponent
   end
 
   def act
+    #TODO :Messages for move/search dirs
+
     char = @input.wait_for_input
     move = @parent.get(:movement)
     pos = @parent.get(:position)
@@ -73,6 +76,26 @@ class PlayerMovementComponent
       close.south if close_dir == 'j'
       close.east if close_dir == 'l'
       close.west if close_dir == 'h'
+    end
+
+    if char == 's'
+      search_dir = @input.wait_for_input
+      search = @parent.get(:search)
+
+      items = nil
+      items = search.north if search_dir == 'k'
+      items = search.south if search_dir == 'j'
+      items = search.east if search_dir == 'l'
+      items = search.west if search_dir == 'h'
+
+      if items.nil?
+        @messages.write 'There is nothing to search'
+      elsif items.count > 0
+        @messages.write "It contains: #{items.join(', ')}"
+      else
+        @messages.write "It contained nothing"
+      end
+
     end
 
     @engine.lock

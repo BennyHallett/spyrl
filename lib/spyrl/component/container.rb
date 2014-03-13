@@ -31,4 +31,8 @@ class ContainerComponent
     items
   end
 
+  def list
+    @items.collect { |i| i.get(:name).name }
+  end
+
 end

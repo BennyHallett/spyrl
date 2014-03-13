@@ -12,6 +12,7 @@ require 'spyrl/component/name'
 require 'spyrl/component/health'
 require 'spyrl/component/attackable'
 require 'spyrl/component/melee'
+require 'spyrl/component/search'
 
 class PlayerFactory
 
@@ -22,7 +23,7 @@ class PlayerFactory
   def create(world, engine, input)
     player = Entity.new
     add_basic_components player, world, :white
-    player.add PlayerMovementComponent.new(player, engine, input, world)
+    player.add PlayerMovementComponent.new(player, engine, input, world, @messages)
     player
   end
 
@@ -46,6 +47,7 @@ class PlayerFactory
     player.add HealthComponent.new(player, 10)
     player.add AttackableComponent.new(player, @messages)
     player.add MeleeComponent.new(player, 1)
+    player.add SearchComponent.new(player, world)
   end
 
 end

@@ -41,6 +41,7 @@ class FeatureFactory
     ruby.add SymbolComponent.new(ruby, 'v', :red)
     ruby.add WalkableComponent.new(ruby, true)
     ruby.add ArtifactComponent.new(ruby)
+    ruby
   end
 
 end
