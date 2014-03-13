@@ -13,6 +13,8 @@ require 'spyrl/component/health'
 require 'spyrl/component/attackable'
 require 'spyrl/component/melee'
 require 'spyrl/component/search'
+require 'spyrl/component/container'
+require 'spyrl/component/take'
 
 class PlayerFactory
 
@@ -47,7 +49,9 @@ class PlayerFactory
     player.add HealthComponent.new(player, 10)
     player.add AttackableComponent.new(player, @messages)
     player.add MeleeComponent.new(player, 1)
+    player.add ContainerComponent.new(player, 1)
     player.add SearchComponent.new(player, world)
+    player.add TakeComponent.new(player, world)
   end
 
 end

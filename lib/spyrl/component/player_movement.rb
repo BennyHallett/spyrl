@@ -15,8 +15,6 @@ class PlayerMovementComponent
   end
 
   def act
-    #TODO :Messages for move/search dirs
-
     char = @input.wait_for_input
     move = @parent.get(:movement)
     pos = @parent.get(:position)
@@ -95,7 +93,25 @@ class PlayerMovementComponent
       else
         @messages.write "It contained nothing"
       end
+    end
 
+    if char == 't'
+      take_dir = @input.wait_for_input
+      take = @parent.get(:take)
+
+      items = nil
+      items = take.north if take_dir == 'k'
+      items = take.south if take_dir == 'j'
+      items = take.east if take_dir == 'l'
+      items = take.west if take_dir == 'h'
+
+      if items.nil?
+        @messages.write 'There is nothing there'
+      elsif items.count > 0
+        @messages.write "You took: #{items.join(', ')}"
+      else
+        @messages.write "There's nothing to take"
+      end
     end
 
     @engine.lock

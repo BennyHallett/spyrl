@@ -2,6 +2,7 @@ require 'delve/widgets/border'
 require 'delve/widgets/viewport'
 require 'delve/widgets/text'
 require 'delve/widgets/progress'
+require 'delve/widgets/key_value'
 require 'spyrl/widget/messages'
 
 class GameScreen
@@ -26,6 +27,9 @@ class GameScreen
     @health ||= ProgressWidget.new display.width - 24, 2, 22, @player.get(:health).current, @player.get(:health).max, :green, :white
     @health.current = @player.get(:health).current
     @message_box ||= MessagesWidget.new 2, display.height - 5, display.width - 6, 4, @messages
+    @carrying ||= KeyValueWidget.new display.width - 24, 4, 'Carrying', 'nothing'
+    items = @player.get(:container).list
+    @carrying.value = items.length <= 0 ? 'nothing' : items.join(', ')
 
     @boundary.draw display
     @game_border.draw display
@@ -38,6 +42,7 @@ class GameScreen
     @name.draw display
     @health.draw display
     @message_box.draw display
+    @carrying.draw display
   end
 
   def partial?
