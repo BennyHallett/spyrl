@@ -114,6 +114,10 @@ class PlayerMovementComponent
       end
     end
 
+    if char == 'd'
+      @parent.get(:drop).drop
+    end
+
     @engine.lock
     char == 'x'
   end

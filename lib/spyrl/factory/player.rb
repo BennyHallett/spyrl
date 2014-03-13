@@ -15,6 +15,7 @@ require 'spyrl/component/melee'
 require 'spyrl/component/search'
 require 'spyrl/component/container'
 require 'spyrl/component/take'
+require 'spyrl/component/drop'
 
 class PlayerFactory
 
@@ -52,6 +53,7 @@ class PlayerFactory
     player.add ContainerComponent.new(player, 1)
     player.add SearchComponent.new(player, world)
     player.add TakeComponent.new(player, world)
+    player.add DropComponent.new(player, world)
   end
 
 end
