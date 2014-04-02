@@ -21,6 +21,8 @@ class World
       loc = random_free_location
       desk = feature_factory.desk(loc[:x], loc[:y])
       desk.get(:container).put(feature_factory.ruby) if i == 0
+      desk.get(:container).put(feature_factory.topaz) if i == 1
+      desk.get(:container).put(feature_factory.emerald) if i == 2
       add_entity(desk)
     end
   end

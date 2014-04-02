@@ -35,10 +35,24 @@ class FeatureFactory
     desk
   end
 
+
   def ruby
+    gem('Ruby', :red)
+  end
+
+  def topaz
+    gem('Topaz', :yellow)
+  end
+
+  def emerald
+    gem('Emerald', :green)
+  end
+
+  private
+  def gem(name, color)
     ruby = Entity.new
-    ruby.add NameComponent.new(ruby, 'Ruby')
-    ruby.add SymbolComponent.new(ruby, 'v', :red)
+    ruby.add NameComponent.new(ruby, name)
+    ruby.add SymbolComponent.new(ruby, 'v', color)
     ruby.add WalkableComponent.new(ruby, true)
     ruby.add ArtifactComponent.new(ruby)
     ruby
