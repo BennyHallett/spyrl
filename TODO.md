@@ -9,7 +9,3 @@
 * Pick up items off floor
 * Message when you walk over an item
 
-
-** Delve **
-
-* Collision should return what you're colliding with
