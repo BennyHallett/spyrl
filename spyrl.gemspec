@@ -22,6 +22,6 @@ lib/spyrl/screens/title.rb
 
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "rake"
-  spec.add_runtime_dependency     "delve"
+  spec.add_runtime_dependency     "delve", '0.0.8'
 end
 

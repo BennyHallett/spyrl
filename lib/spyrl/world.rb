@@ -57,7 +57,7 @@ class World
     @height
   end
 
-  def free(x, y)
+  def free?(x, y)
     tile = at(x, y)
     if tile.respond_to?(:has?)
       return(tile.has?(:walkable) and tile.get(:walkable).walkable)
@@ -70,7 +70,7 @@ class World
     rx = (rand * @width).floor
     ry = (rand * @height).floor
 
-    while !free(rx, ry)
+    while !free?(rx, ry)
       rx = (rand * @width).floor
       ry = (rand * @height).floor
     end

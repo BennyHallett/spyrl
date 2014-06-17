@@ -2,13 +2,13 @@ PATH
   remote: .
   specs:
     spyrl (0.0.1)
-      delve
+      delve (= 0.0.8)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    delve (0.0.6)
-      perlin_noise
+    delve (0.0.8)
+      perlin_noise (= 0.1.2)
     perlin_noise (0.1.2)
     rake (10.1.1)
 
